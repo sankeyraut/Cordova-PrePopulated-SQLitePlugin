@@ -176,11 +176,12 @@ static void sqlite_regexp(sqlite3_context* context, int argc, sqlite3_value** va
     return self;
 }
 
--(id) getDBPath:(id)dbFile {
+-(NSString*) getDBPath:(id)dbFile {
     if (dbFile == NULL) {
         return NULL;
     }
     NSString *dbPath = [NSString stringWithFormat:@"%@/%@", appDocsPath, dbFile];
+    //NSString *dbPath = @"./www/amhi.db";
     return dbPath;
 }
 
@@ -250,6 +251,12 @@ static void sqlite_regexp(sqlite3_context* context, int argc, sqlite3_value** va
 
 -(void)copyPrepopulatedDatabase:(NSString *)dbfile withDbname:(NSString *)dbname {
     NSString *prepopulatedDb = [[NSBundle mainBundle] pathForResource:dbfile ofType:@".db"];
+    
+    if (!prepopulatedDb) {
+        NSString *path = [[NSBundle mainBundle] resourcePath];
+        prepopulatedDb = [path stringByAppendingString:@"/www/amhi.db"];
+    }
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if([fileManager fileExistsAtPath:prepopulatedDb]) {
         NSError *error;

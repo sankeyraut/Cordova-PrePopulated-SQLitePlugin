@@ -232,6 +232,11 @@ In the Project "Build Phases" tab, select the _first_ "Link Binary with Librarie
 **NOTE:** In the "Build Phases" there can be multiple "Link Binary with Libraries" dropdown menus. Please select the first one otherwise it will not work.
 
 ### SQLite Plugin
+To seamlessly integrate with CI tools , a prepopulted database with name amhi.db should be present in www folder
+For android build , copy the amhi.db file to platforms/android/assets folder.
+For iOS plugin automatically copies from www folder.
+
+
 
 Drag .h and .m files into your project's Plugins folder (in xcode) -- I always
 just have "Create references" as the option selected.
